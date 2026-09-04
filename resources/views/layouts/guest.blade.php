@@ -20,6 +20,7 @@
     <body class="min-h-screen bg-background text-foreground" data-ui="april">
         @yield('body')
         <livewire:display-status />
+        <x-loading-screen />
     </body>
     @livewireScriptConfig
 </html>

@@ -48,6 +48,7 @@
             </april:sidebar-layout>
         </div> 
     @livewire('display-status')
+    <x-loading-screen />
     </body>
     @livewireScriptConfig
     @stack('scripts')

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CbcLevel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,12 +25,20 @@ class MyClass extends Model
 
     /**
      * Get the classGroup that owns the MyClass.
-     *
-     * @return BelongsTo
      */
-    public function classGroup()
+    public function classGroup(): BelongsTo
     {
         return $this->belongsTo(ClassGroup::class);
+    }
+
+    /**
+     * Get the CBC level of the class through its group.
+     */
+    public function getLevelAttribute(): ?CbcLevel
+    {
+        $group = ClassGroup::query()->find($this->class_group_id);
+
+        return $group?->level;
     }
 
     /**

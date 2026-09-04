@@ -7,6 +7,7 @@
             <x-display-validation-errors/>
             <x-input id="name" name="name" label="Exam slot name" placeholder="Enter Exam slot name"  />
             <x-textarea id="description" name="description" label="Description" placeholder="Enter description"  />
+            <x-input id="strand" name="strand" label="Strand (optional)" placeholder="CBC strand assessed in this slot" />
             <x-input id="total-marks" name="total_marks" label="Maximum marks obtainable" placeholder="Enter max mark"  type="number" />
             @csrf
             <x-button label="Create" theme="primary" icon="fas fa-key" type="submit" class="w-full md:w-1/2"/>

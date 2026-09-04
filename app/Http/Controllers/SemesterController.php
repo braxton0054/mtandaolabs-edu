@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SemesterStoreRequest;
 use App\Http\Requests\SetSemesterRequest;
+use App\Models\AcademicYear;
 use App\Models\Semester;
 use App\Services\Semester\SemesterService;
 use Illuminate\Http\RedirectResponse;
@@ -44,7 +45,7 @@ class SemesterController extends Controller
         $data = $request->except(['_token']);
         $this->semester->createSemester($data);
 
-        return back()->with('success', 'Successfully created semester');
+        return back()->with('success', 'Successfully created term');
     }
 
     /**
@@ -71,7 +72,7 @@ class SemesterController extends Controller
         $data = $request->except('_token', '_method');
         $this->semester->updateSemester($semester, $data);
 
-        return back()->with('success', 'Successfully updated semester');
+        return back()->with('success', 'Successfully updated term');
     }
 
     /**
@@ -81,7 +82,20 @@ class SemesterController extends Controller
     {
         $this->semester->deleteSemester($semester);
 
-        return back()->with('success', 'Successfully deleted semester');
+        return back()->with('success', 'Successfully deleted term');
+    }
+
+    /**
+     * Restore the official MoE term dates for the current school year.
+     */
+    public function resetCalendar(): RedirectResponse
+    {
+        $this->authorize('setSemester', Semester::class);
+        $school = current_school();
+        $year = AcademicYear::query()->find($school->academic_year_id);
+        $count = $this->semester->resetToOfficialCalendar($school->id, $year === null ? (int) date('Y') : (int) $year->start_year);
+
+        return back()->with('success', "Restored official MoE dates on {$count} terms");
     }
 
     /**
@@ -93,6 +107,6 @@ class SemesterController extends Controller
         $semester = Semester::findOrFail($request->semester_id);
         $this->semester->setSemester($semester);
 
-        return back()->with('success', 'Successfully set current semester');
+        return back()->with('success', 'Successfully set current term');
     }
 }

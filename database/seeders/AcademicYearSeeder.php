@@ -10,20 +10,19 @@ class AcademicYearSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * Kenya runs the school year inside one calendar year (January to
+     * December), so start and stop fall in the same year.
      */
     public function run()
     {
+        $year = (int) date('Y');
         $academicYear = AcademicYear::firstOrCreate([
-            'id' => 1,
-
+            'school_id' => 1,
+            'start_year' => (string) $year,
         ], [
-            'school_id'  => 1,
-            'start_year' => date('Y'),
-            'stop_year'  => date('Y') + 1,
+            'stop_year' => (string) $year,
         ]);
         $academicYear->school->academic_year_id = $academicYear->id;
         $academicYear->school->save();
-        AcademicYear::factory()->count(4)->create();
     }
 }

@@ -35,8 +35,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(100);
 
-        // Behind Caddy + Cloudflare: always generate HTTPS URLs.
-        URL::forceScheme('https');
+        // Behind Caddy + Cloudflare: always generate HTTPS URLs in production.
+        // Local dev serves plain HTTP, so only force it outside local/testing.
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
 
         // Platform access sits outside school roles. A school role name must
         // never grant access above its own school.

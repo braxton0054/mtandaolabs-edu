@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\ClassGroup;
+use App\Models\GradeSystem;
 use App\Traits\FeatureTestTrait;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -60,21 +62,24 @@ class GradeSystemTest extends TestCase
 
     public function test_authorized_user_can_create_grade_system()
     {
+        // Seeded CBC groups already carry full 0-100 bands, so create in a
+        // fresh group where the range cannot overlap anything.
+        $group = ClassGroup::factory()->create();
         $this->authorized_user(['create grade system'])
             ->post('/dashboard/grade-systems', [
-                'name'           => 'test grade',
-                'remark'         => 'test remarks',
-                'grade_from'     => '0',
-                'grade_till'     => '10',
-                'class_group_id' => '1',
+                'name' => 'test grade',
+                'remark' => 'test remarks',
+                'grade_from' => '0',
+                'grade_till' => '10',
+                'class_group_id' => (string) $group->id,
             ]);
 
         $this->assertDatabaseHas('grade_systems', [
-            'name'           => 'test grade',
-            'remark'         => 'test remarks',
-            'grade_from'     => '0',
-            'grade_till'     => '10',
-            'class_group_id' => '1',
+            'name' => 'test grade',
+            'remark' => 'test remarks',
+            'grade_from' => '0',
+            'grade_till' => '10',
+            'class_group_id' => (string) $group->id,
         ]);
     }
 
@@ -109,22 +114,28 @@ class GradeSystemTest extends TestCase
 
     public function test_authorized_user_can_update_grade_system()
     {
+        $group = ClassGroup::factory()->create();
+        $grade = GradeSystem::create([
+            'name' => 'test band', 'remark' => 'remarks',
+            'grade_from' => '1000', 'grade_till' => '2000',
+            'class_group_id' => $group->id,
+        ]);
         $this->authorized_user(['update grade system'])
-            ->put('/dashboard/grade-systems/1', [
-                'name'           => 'test grade',
-                'remark'         => 'test remarks',
-                'grade_from'     => '90',
-                'grade_till'     => '100',
-                'class_group_id' => '1',
+            ->put("/dashboard/grade-systems/{$grade->id}", [
+                'name' => 'test grade',
+                'remark' => 'test remarks',
+                'grade_from' => '90',
+                'grade_till' => '100',
+                'class_group_id' => (string) $group->id,
             ]);
 
         $this->assertDatabaseHas('grade_systems', [
-            'id'             => '1',
-            'name'           => 'test grade',
-            'remark'         => 'test remarks',
-            'grade_from'     => '90',
-            'grade_till'     => '100',
-            'class_group_id' => '1',
+            'id' => (string) $grade->id,
+            'name' => 'test grade',
+            'remark' => 'test remarks',
+            'grade_from' => '90',
+            'grade_till' => '100',
+            'class_group_id' => (string) $group->id,
         ]);
     }
 

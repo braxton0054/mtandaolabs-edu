@@ -12,14 +12,13 @@ class EnsureSemesterIsSet
     /**
      * Handle an incoming request.
      *
-     * @param Closure(Request): (Response|RedirectResponse) $next
-     *
+     * @param  Closure(Request): (Response|RedirectResponse)  $next
      * @return Response|RedirectResponse
      */
     public function handle(Request $request, Closure $next)
     {
         if (current_school()->semester_id == null) {
-            session()->flash('danger', 'Please set the semester before proceeding.');
+            session()->flash('danger', 'Please set the term before proceeding.');
 
             return redirect()->route('semesters.index');
         }

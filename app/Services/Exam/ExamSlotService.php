@@ -23,8 +23,7 @@ class ExamSlotService
     /**
      * Get an exam slot by id.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return ExamSlot|null
      */
     public function getExamSlotById($id)
@@ -45,8 +44,9 @@ class ExamSlotService
                 $data['description'] = null;
             }
             $exam->examSlots()->create([
-                'name'        => $data['name'],
+                'name' => $data['name'],
                 'description' => $data['description'],
+                'strand' => $data['strand'] ?? null,
                 'total_marks' => $data['total_marks'],
             ]);
         });
@@ -65,8 +65,9 @@ class ExamSlotService
                 $data['description'] = null;
             }
             $examSlot->update([
-                'name'        => $data['name'],
+                'name' => $data['name'],
                 'description' => $data['description'],
+                'strand' => $data['strand'] ?? $examSlot->strand,
                 'total_marks' => $data['total_marks'],
             ]);
         });

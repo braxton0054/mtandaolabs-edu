@@ -60,6 +60,8 @@ Route::middleware('auth', 'verified', 'App\Http\Middleware\EnsureAccountIsActive
             Route::get('students/promotions', ['App\Http\Controllers\PromotionController', 'index'])->name('students.promotions');
             Route::get('students/promote', ['App\Http\Controllers\PromotionController', 'promoteView'])->name('students.promote');
             Route::post('students/promote', ['App\Http\Controllers\PromotionController', 'promote']);
+            Route::get('students/place-senior', ['App\Http\Controllers\PromotionController', 'placeSeniorView'])->name('students.place-senior');
+            Route::post('students/place-senior', ['App\Http\Controllers\PromotionController', 'placeSenior']);
             Route::get('students/promotions/{promotion}', ['App\Http\Controllers\PromotionController', 'show'])->name('students.promotions.show');
             Route::delete('students/promotions/{promotion}/reset', ['App\Http\Controllers\PromotionController', 'resetPromotion'])->name('students.promotions.reset');
 
@@ -72,6 +74,7 @@ Route::middleware('auth', 'verified', 'App\Http\Middleware\EnsureAccountIsActive
             // semester routes
             Route::resource('semesters', SemesterController::class);
             Route::post('semesters/set', ['App\Http\Controllers\SemesterController', 'setSemester'])->name('semesters.set-semester');
+            Route::post('semesters/reset-calendar', ['App\Http\Controllers\SemesterController', 'resetCalendar'])->name('semesters.reset-calendar');
 
             Route::middleware(['App\Http\Middleware\EnsureSemesterIsSet'])->group(function () {
                 // fee categories routes
@@ -85,6 +88,9 @@ Route::middleware('auth', 'verified', 'App\Http\Middleware\EnsureAccountIsActive
                 Route::get('fees/fee-invoices/{fee_invoice}/pay', ['App\Http\Controllers\FeeInvoiceController', 'payView'])->name('fee-invoices.pay');
                 Route::get('fees/fee-invoices/{fee_invoice}/print', ['App\Http\Controllers\FeeInvoiceController', 'print'])->name('fee-invoices.print');
                 Route::resource('fees/fee-invoices', FeeInvoiceController::class);
+
+                // term fee structures (before the fees resource so fees/{fee} does not swallow it)
+                Route::get('fees/fee-structures', ['App\Http\Controllers\FeeStructureController', 'index'])->name('fee-structures.index');
 
                 // fee routes
                 Route::resource('fees', FeeController::class);
@@ -121,6 +127,9 @@ Route::middleware('auth', 'verified', 'App\Http\Middleware\EnsureAccountIsActive
 
                 // result checker
                 Route::get('exams/result-checker', ['App\Http\Controllers\ExamController', 'resultChecker'])->name('exams.result-checker');
+
+                // per-learner CBC report card
+                Route::get('exams/report-card/{student}/{scope}/{scopeId}', ['App\Http\Controllers\ExamController', 'printReportCard'])->name('exams.report-card');
 
                 // exam routes
                 Route::resource('exams', ExamController::class);

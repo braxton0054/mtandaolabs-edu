@@ -14,8 +14,9 @@ class StoreExamSlotRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:10000',
+            'strand' => 'nullable|string|max:255',
             'total_marks' => 'required|integer|min:1',
         ];
     }

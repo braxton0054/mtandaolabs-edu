@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PlaceSeniorRequest;
 use App\Http\Requests\StudentPromoteRequest;
+use App\Models\MyClass;
+use App\Models\Pathway;
 use App\Models\Promotion;
+use App\Models\User;
+use App\Services\Cbc\PlacementService;
 use App\Services\Student\StudentService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
@@ -48,6 +53,35 @@ class PromotionController extends Controller
         $this->student->promoteStudents($data);
 
         return back()->with('success', 'Students Promoted Successfully');
+    }
+
+    /**
+     * Senior placement view (Grade 9 into a pathway).
+     */
+    public function placeSeniorView(): View
+    {
+        $this->authorize('promote', Promotion::class);
+
+        return view('pages.student.promotion.place-senior');
+    }
+
+    /**
+     * Place a learner into Senior School.
+     */
+    public function placeSenior(PlaceSeniorRequest $request, PlacementService $placement): RedirectResponse
+    {
+        $this->authorize('promote', Promotion::class);
+        $placement->placeToSenior(
+            User::findOrFail($request->input('student_id')),
+            Pathway::findOrFail($request->input('pathway_id')),
+            MyClass::findOrFail($request->input('senior_class_id')),
+            $request->input('electives', []),
+            $request->input('kjsea_score') !== null ? (float) $request->input('kjsea_score') : null,
+            $request->input('senior_section_id'),
+            current_school()->academic_year_id,
+        );
+
+        return back()->with('success', 'Learner Placed Successfully');
     }
 
     /**

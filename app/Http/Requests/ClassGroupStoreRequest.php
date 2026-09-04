@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\CbcLevel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -32,6 +33,7 @@ class ClassGroupStoreRequest extends FormRequest
                 'max:255',
                 Rule::unique('class_groups')->where(fn ($query) => $query->where('school_id', $this->input('school_id') ?? current_school_id())),
             ],
+            'level' => ['nullable', Rule::enum(CbcLevel::class)],
         ];
     }
 }

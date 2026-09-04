@@ -20,10 +20,14 @@ class Promotion extends Model
         'academic_year_id',
         'students',
         'school_id',
+        'pathway_id',
+        'elective_subject_ids',
+        'placement_score',
     ];
 
     protected $casts = [
         'students' => 'array',
+        'elective_subject_ids' => 'array',
     ];
 
     public function getLabelAttribute()
@@ -54,5 +58,10 @@ class Promotion extends Model
     public function academicYear(): BelongsTo
     {
         return $this->belongsTo(AcademicYear::class, 'academic_year_id');
+    }
+
+    public function pathway(): BelongsTo
+    {
+        return $this->belongsTo(Pathway::class);
     }
 }

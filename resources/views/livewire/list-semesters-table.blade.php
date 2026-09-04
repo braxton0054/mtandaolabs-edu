@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title">Semester List for {{current_school()->academicYear->name}}</h4>
+        <h4 class="card-title">Term List for {{current_school()->academicYear->name}}</h4>
     </div>
     <div class="card-body">
         <livewire:datatable :model="App\Models\Semester::class" 

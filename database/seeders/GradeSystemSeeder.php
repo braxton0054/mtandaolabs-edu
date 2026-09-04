@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\ClassGroup;
+use App\Models\CompetencyLevel;
 use App\Models\GradeSystem;
 use Illuminate\Database\Seeder;
 
@@ -10,71 +12,38 @@ class GradeSystemSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     * Every CBC level reports against the four national competency bands,
+     * so each levelled group gets exactly those four bands.
      */
     public function run()
     {
-        GradeSystem::firstOrCreate([
-            'id'             => 1,
-            'name'           => 'A+',
-            'remark'         => 'Excellent',
-            'grade_from'     => '90',
-            'grade_till'     => '100',
-            'class_group_id' => 1,
-        ]);
+        $levels = CompetencyLevel::query()->get()->keyBy('code');
+        if ($levels->isEmpty()) {
+            return;
+        }
 
-        GradeSystem::firstOrCreate([
-            'id'             => 2,
-            'name'           => 'A',
-            'remark'         => 'Very Good',
-            'grade_from'     => '80',
-            'grade_till'     => '89',
-            'class_group_id' => 1,
-        ]);
+        $bands = [
+            ['code' => 'EE', 'grade_from' => '80', 'grade_till' => '100', 'remark' => 'Exceeding Expectation'],
+            ['code' => 'ME', 'grade_from' => '65', 'grade_till' => '79', 'remark' => 'Meeting Expectation'],
+            ['code' => 'AP', 'grade_from' => '50', 'grade_till' => '64', 'remark' => 'Approaching Expectation'],
+            ['code' => 'BE', 'grade_from' => '0', 'grade_till' => '49', 'remark' => 'Below Expectation'],
+        ];
 
-        GradeSystem::firstOrCreate([
-            'id'             => 3,
-            'name'           => 'B+',
-            'remark'         => 'Good',
-            'grade_from'     => '70',
-            'grade_till'     => '79',
-            'class_group_id' => 1,
-        ]);
+        $groups = ClassGroup::query()->where('school_id', 1)->whereNotNull('level')->get();
 
-        GradeSystem::firstOrCreate([
-            'id'             => 4,
-            'name'           => 'B',
-            'remark'         => 'Satisfactory',
-            'grade_from'     => '60',
-            'grade_till'     => '69',
-            'class_group_id' => 1,
-        ]);
+        foreach ($groups as $group) {
+            GradeSystem::query()->where('class_group_id', $group->id)->delete();
 
-        GradeSystem::firstOrCreate([
-            'id'             => 5,
-            'name'           => 'C+',
-            'remark'         => 'Fair',
-            'grade_from'     => '50',
-            'grade_till'     => '59',
-            'class_group_id' => 1,
-        ]);
-
-        GradeSystem::firstOrCreate([
-            'id'             => 6,
-            'name'           => 'C',
-            'remark'         => 'Pass',
-            'grade_from'     => '40',
-            'grade_till'     => '49',
-            'class_group_id' => 1,
-        ]);
-
-        GradeSystem::firstOrCreate([
-            'id'             => 7,
-            'name'           => 'D',
-            'remark'         => 'Fail',
-            'grade_from'     => '20',
-            'grade_till'     => '39',
-            'class_group_id' => 1,
-        ]);
+            foreach ($bands as $band) {
+                GradeSystem::create([
+                    'name' => $band['code'],
+                    'remark' => $band['remark'],
+                    'grade_from' => $band['grade_from'],
+                    'grade_till' => $band['grade_till'],
+                    'class_group_id' => $group->id,
+                    'competency_level_id' => $levels->get($band['code'])?->id,
+                ]);
+            }
+        }
     }
 }

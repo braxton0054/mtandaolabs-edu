@@ -20,18 +20,20 @@
                 <th class="border p-4">Total Marks</th>
                 <th class="border p-4">Percentage (%)</th>
                 <th class="border p-4">Grade</th>
+                <th class="border p-4">Competency</th>
             </thead>
              @foreach ($tabulatedRecords->sortByDesc('total') as $tabulatedRecord)
             <tr>
                 <td class="border p-4">{{$loop->iteration}}</td>
                 <td class="border p-4">{{$tabulatedRecord['student_name']}}</td>
                 <td class="border p-4">{{$tabulatedRecord['admission_number']}}</td>
-                @foreach ($tabulatedRecord['student_marks'] as $item)
-                    <td class="hide-on-print border p-4">{{$item}}</td>
+                @foreach ($subjects as $subject)
+                    <td class="hide-on-print border p-4">{{$tabulatedRecord['student_marks'][$subject->id] ?? ''}}<br/><small>{{($tabulatedRecord['subject_competency'] ?? [])[$subject->id] ?? ''}}</small></td>
                 @endforeach
                 <td class="border p-4">{{$tabulatedRecord['total']}}</td>
                 <td class="border p-4">{{$tabulatedRecord['percent']}}</td>
                 <td class="border p-4">{{$tabulatedRecord['grade']}}</td>
+                <td class="border p-4">{{$tabulatedRecord['competency'] ?? ''}}</td>
             </tr>
             @endforeach
         </table>

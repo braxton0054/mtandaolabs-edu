@@ -15,15 +15,15 @@ class FeeInvoice extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'note', 'issue_date', 'due_date', 'user_id'];
+    protected $fillable = ['name', 'note', 'issue_date', 'due_date', 'user_id', 'semester_id'];
 
     protected $casts = [
         'issue_date' => 'datetime:Y-m-d',
-        'due_date'   => 'datetime:Y-m-d',
-        'amount'     => Money::class,
-        'fine'       => Money::class,
-        'paid'       => Money::class,
-        'waiver'     => Money::class,
+        'due_date' => 'datetime:Y-m-d',
+        'amount' => Money::class,
+        'fine' => Money::class,
+        'paid' => Money::class,
+        'waiver' => Money::class,
     ];
 
     /**
@@ -47,7 +47,7 @@ class FeeInvoice extends Model
      *
      * The school link lives on the person's membership, not on a column.
      *
-     * @param Builder<FeeInvoice> $query
+     * @param  Builder<FeeInvoice>  $query
      */
     public function scopeOfSchool(Builder $query, School|int|null $school = null): Builder
     {

@@ -4,9 +4,9 @@
     ['href'=> route('semesters.create'), 'text'=> 'Create' , 'active'],
 ]])
 
-@section('title', __('Create semester'))
+@section('title', __('Create term'))
 
-@section('page_heading',  __('Create semester'))
+@section('page_heading',  __('Create term'))
 
 @section('content' )
     @livewire('create-semester-form')

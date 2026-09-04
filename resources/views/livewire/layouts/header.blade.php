@@ -40,7 +40,7 @@
                     <p class="px-2 py-1.5 text-xs text-muted-foreground">
                         @if (current_school() !== null)
                             Academic year: {{current_school()->academicYear?->name}}<br>
-                            Semester: {{current_school()->semester?->name}}
+                            Term: {{current_school()->semester?->name}}
                         @endif
                     </p>
                     <form action="{{route('logout')}}" method="POST">

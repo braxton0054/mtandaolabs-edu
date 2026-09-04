@@ -12,6 +12,23 @@
                     <option value="{{$class->id}}">{{$class->name}}</option>
                 @endforeach
             </x-select>
+            <x-select id="pathway-select" name="pathway_id" label="Pathway (Senior electives only)" placeholder="No pathway..." >
+                @foreach (\App\Models\Pathway::query()->orderBy('name')->get() as $pathway)
+                    <option value="{{$pathway->id}}">{{$pathway->name}}</option>
+                @endforeach
+            </x-select>
+            <div class="my-2">
+                <input type="hidden" name="is_compulsory" value="0"/>
+                <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" name="is_compulsory" value="1" checked/> Compulsory subject
+                </label>
+            </div>
+            <div class="my-2">
+                <input type="hidden" name="is_examinable" value="0"/>
+                <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" name="is_examinable" value="1" checked/> Examinable subject
+                </label>
+            </div>
             <x-select id="select" name="teachers[]" multiple label="Select Teachers" placeholder="Select teachers.....">
                 @foreach ($teachers as $teacher)
                     <option value="{{$teacher->id}}">{{$teacher->name}}</option>

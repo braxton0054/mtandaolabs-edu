@@ -8,6 +8,7 @@ use App\Models\ExamSlot;
 use App\Models\GradeSystem;
 use App\Models\Subject;
 use App\Models\User;
+use App\Services\Cbc\CompetencyService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
 
@@ -31,10 +32,9 @@ trait MarkTabulationTrait
     public Collection $students;
 
     /**
-     * @param Collection<int, Subject>  $subjects
-     * @param Collection<int, User>     $students
-     * @param Collection<int, ExamSlot> $examSlots
-     *
+     * @param  Collection<int, Subject>  $subjects
+     * @param  Collection<int, User>  $students
+     * @param  Collection<int, ExamSlot>  $examSlots
      * @return Collection
      */
     public function tabulateMarks(ClassGroup $classGroup, Collection|SupportCollection $subjects, Collection|SupportCollection $students, Collection|SupportCollection $examSlots)
@@ -48,6 +48,7 @@ trait MarkTabulationTrait
         // get all grades in class group
         $grades = GradeSystem::where('class_group_id', $classGroup->id)->get();
         $totalMarksAttainableInEachSubject = $examSlots->sum(['total_marks']);
+        $competencyService = new CompetencyService;
 
         // set public variables
         $this->totalMarksAttainableInEachSubject = $totalMarksAttainableInEachSubject;
@@ -71,6 +72,12 @@ trait MarkTabulationTrait
 
                 // array used for calculating total marks
                 $totalSubjectMarks[] = $tabulatedRecords[$student->id]['student_marks'][$subject->id];
+
+                // competency per subject, alongside the raw marks
+                $attainable = $totalMarksAttainableInEachSubject ? $totalMarksAttainableInEachSubject : 1;
+                $subjectPercent = (int) ceil(($tabulatedRecords[$student->id]['student_marks'][$subject->id] / $attainable) * 100);
+                $tabulatedRecords[$student->id]['subject_percent'][$subject->id] = $subjectPercent;
+                $tabulatedRecords[$student->id]['subject_competency'][$subject->id] = $competencyService->forPercentage($classGroup->id, $subjectPercent)?->code;
             }
 
             // turned to object
@@ -90,6 +97,9 @@ trait MarkTabulationTrait
 
             // get appropriate grade
             $tabulatedRecords[$student->id]['grade'] = $grade ? $grade->name : 'No Grade';
+
+            // overall competency next to the overall grade
+            $tabulatedRecords[$student->id]['competency'] = $competencyService->forPercentage($classGroup->id, (int) $percentage)?->code;
         }
 
         return collect($tabulatedRecords);

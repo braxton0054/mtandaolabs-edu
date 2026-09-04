@@ -17,6 +17,12 @@
                     <option value="{{$classGroup->id}}" @selected(old('class_group_id') == $classGroup->id)>{{$classGroup->name}}</option>
                 @endforeach
             </x-select>
+            <x-select id="competency-level" name="competency_level_id" fgroup-class="col-md-6 mx-1" label="Competency Level">
+                <option value="">No level</option>
+                @foreach (\App\Models\CompetencyLevel::query()->orderBy('sort_order')->get() as $competency)
+                    <option value="{{$competency->id}}" @selected(old('competency_level_id') == $competency->id)>{{$competency->code}} - {{$competency->name}}</option>
+                @endforeach
+            </x-select>
             <div class='col-12 my-2'>
                 <x-button label="Create" theme="primary" icon="fas fa-key" type="submit" class="w-full md:w-1/2"/>
             </div>

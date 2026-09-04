@@ -27,7 +27,7 @@ class AcademicYear extends Model
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn () => "$this->start_year - $this->stop_year",
+            get: fn () => $this->start_year === $this->stop_year ? (string) $this->start_year : "$this->start_year - $this->stop_year",
         );
     }
 

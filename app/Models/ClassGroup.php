@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CbcLevel;
 use App\Traits\InSchool;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,11 @@ class ClassGroup extends Model
     use InSchool;
 
     protected $fillable = [
-        'name', 'school_id',
+        'name', 'school_id', 'level',
+    ];
+
+    protected $casts = [
+        'level' => CbcLevel::class,
     ];
 
     public function school()

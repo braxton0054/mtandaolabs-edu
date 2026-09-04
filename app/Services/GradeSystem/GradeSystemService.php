@@ -35,11 +35,10 @@ class GradeSystemService
     /**
      * Create grade in gradesystem.
      *
-     * @param array|object $records
+     * @param  array|object  $records
+     * @return void
      *
      * @throws DuplicateRangeException
-     *
-     * @return void
      */
     public function createGradeSystem($records)
     {
@@ -52,21 +51,21 @@ class GradeSystemService
 
         GradeSystem::create([
             'class_group_id' => $records['class_group_id'],
-            'grade_from'     => $records['grade_from'],
-            'grade_till'     => $records['grade_till'],
-            'name'           => $records['name'],
-            'remark'         => $records['remark'],
+            'grade_from' => $records['grade_from'],
+            'grade_till' => $records['grade_till'],
+            'name' => $records['name'],
+            'remark' => $records['remark'],
+            'competency_level_id' => $records['competency_level_id'] ?? null,
         ]);
     }
 
     /**
      * Update grade in gradesystem.
      *
-     * @param array|object $records
+     * @param  array|object  $records
+     * @return void
      *
      * @throws DuplicateRangeException
-     *
-     * @return void
      */
     public function updateGradeSystem(GradeSystem $grade, $records)
     {
@@ -78,10 +77,11 @@ class GradeSystemService
 
         $grade->update([
             'class_group_id' => $records['class_group_id'],
-            'grade_from'     => $records['grade_from'],
-            'grade_till'     => $records['grade_till'],
-            'name'           => $records['name'],
-            'remark'         => $records['remark'],
+            'grade_from' => $records['grade_from'],
+            'grade_till' => $records['grade_till'],
+            'name' => $records['name'],
+            'remark' => $records['remark'],
+            'competency_level_id' => $records['competency_level_id'] ?? $grade->competency_level_id,
         ]);
         $grade->save();
     }
@@ -98,9 +98,8 @@ class GradeSystemService
     }
 
     /**
-     * @param array $grade  with grade_from and grade_till
-     * @param array $grades each with grade_from and grade_till (testing against)
-     *
+     * @param  array  $grade  with grade_from and grade_till
+     * @param  array  $grades  each with grade_from and grade_till (testing against)
      * @return bool
      */
     public function gradeRangeExists($grade, $grades)

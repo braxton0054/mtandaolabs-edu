@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AssessmentType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +20,8 @@ class Exam extends Model
         'stop_date',
         'active',
         'publish_result',
+        'assessment_type',
+        'weight_percent',
     ];
 
     /**
@@ -28,10 +31,11 @@ class Exam extends Model
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'start_date'        => 'date:Y-m-d',
-        'stop_date'         => 'date:Y-m-d',
-        'active'            => 'boolean',
-        'publish_result'    => 'boolean',
+        'start_date' => 'date:Y-m-d',
+        'stop_date' => 'date:Y-m-d',
+        'active' => 'boolean',
+        'publish_result' => 'boolean',
+        'assessment_type' => AssessmentType::class,
     ];
 
     public function semester(): BelongsTo

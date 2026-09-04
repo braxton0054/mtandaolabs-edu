@@ -44,17 +44,22 @@ class SubjectService
     /**
      * Create subject.
      *
-     * @param mixed $data
-     *
+     * @param  mixed  $data
      * @return void
      */
     public function createSubject($data)
     {
-        $subject = Subject::firstOrCreate(['name' => $data['name']], [
-            'short_name'  => $data['short_name'],
-            'school_id'   => current_school_id(),
-            'my_class_id' => $data['my_class_id'],
-        ]);
+        $subject = Subject::firstOrCreate(
+            ['name' => $data['name'], 'my_class_id' => $data['my_class_id'] ?? null],
+            [
+                'short_name' => $data['short_name'],
+                'school_id' => current_school_id(),
+                'my_class_id' => $data['my_class_id'] ?? null,
+                'pathway_id' => $data['pathway_id'] ?? null,
+                'is_compulsory' => $data['is_compulsory'] ?? true,
+                'is_examinable' => $data['is_examinable'] ?? true,
+            ]
+        );
 
         if (!$subject->wasRecentlyCreated) {
             throw new ResourceNotEmptyException('Subject already exists or something went wrong');
@@ -75,14 +80,16 @@ class SubjectService
     /**
      * Update subject.
      *
-     * @param mixed $data
-     *
+     * @param  mixed  $data
      * @return void
      */
     public function updateSubject(Subject $subject, $data)
     {
         $subject->name = $data['name'];
         $subject->short_name = $data['short_name'];
+        $subject->pathway_id = $data['pathway_id'] ?? $subject->pathway_id;
+        $subject->is_compulsory = $data['is_compulsory'] ?? $subject->is_compulsory;
+        $subject->is_examinable = $data['is_examinable'] ?? $subject->is_examinable;
 
         $subject->save();
 
@@ -115,8 +122,7 @@ class SubjectService
     /**
      * Assign a teacher to a list of subjects.
      *
-     * @param array|mixed $records Array or collection of ids
-     *
+     * @param  array|mixed  $records  Array or collection of ids
      * @return void
      */
     public function assignTeacherToSubjects(User $teacher, $records)

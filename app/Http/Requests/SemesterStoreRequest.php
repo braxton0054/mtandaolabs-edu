@@ -21,6 +21,10 @@ class SemesterStoreRequest extends FormRequest
     {
         return [
             'name' => 'string|max:255',
+            'start_date' => 'nullable|date',
+            'stop_date' => 'nullable|date|after_or_equal:start_date',
+            'midterm_start' => 'nullable|date',
+            'midterm_stop' => 'nullable|date|after_or_equal:midterm_start',
         ];
     }
 }

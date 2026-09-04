@@ -9,6 +9,7 @@
             <x-textarea id="description" name="description" label="Description" placeholder="Enter description"  >
                 {{$examSlot->description}}
             </x-textarea>
+            <x-input id="strand" name="strand" label="Strand (optional)" placeholder="CBC strand assessed in this slot" value="{{$examSlot->strand}}" />
             <x-input id="total_marks" name="total_marks" label="Maximum marks obtainable" placeholder="Enter max mark" type="number"  value="{{$examSlot->total_marks}}"/>
             @csrf
             @method('PUT')

@@ -17,7 +17,7 @@
                             @endforeach
                         @endisset
                     </x-select>
-                    <x-select id="semester" name="semester" label="Semester of exam"   wire:model.live="semester" group-class="">
+                    <x-select id="semester" name="semester" label="Term of exam"   wire:model.live="semester" group-class="">
                         <option value="">Entire Academic Year</option>
                         @isset($semesters)
                             @foreach ($semesters as $item)
@@ -57,6 +57,9 @@
         @endif
         @if ($preparedResults == true)
             @isset($exams)
+                <div class="my-3">
+                    <a href="{{route('exams.report-card', ['student' => $student, 'scope' => $semester ? 'semester' : 'academic-year', 'scopeId' => $semester ?? $academicYear])}}" class="btn btn-primary" target="_blank">Download Report Card (PDF)</a>
+                </div>
                 <div class="overflow-scroll beautify-scrollbar">
                     <table class="border w-full">
                         <thead>

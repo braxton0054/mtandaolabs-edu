@@ -11,7 +11,7 @@ class ExamSlot extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'total_marks', 'exam_id'];
+    protected $fillable = ['name', 'description', 'strand', 'total_marks', 'exam_id'];
 
     /**
      * Get the exam that owns the ExamSlot.

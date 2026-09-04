@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             SectionSeeder::class,
             UserSeeder::class,
             StudentSeeder::class,
+            PathwaySeeder::class,
             SubjectSeeder::class,
             AcademicYearSeeder::class,
             SemesterSeeder::class,
@@ -28,6 +29,8 @@ class DatabaseSeeder extends Seeder
             SyllabusSeeder::class,
             TimetableSeeder::class,
             ExamSeeder::class,
+            NationalAssessmentSeeder::class,
+            CompetencyLevelSeeder::class,
             GradeSystemSeeder::class,
             ExamSlotSeeder::class,
             ExamRecordSeeder::class,
@@ -36,6 +39,7 @@ class DatabaseSeeder extends Seeder
             FeeSeeder::class,
             FeeInvoiceSeeder::class,
             FeeInvoiceRecordSeeder::class,
+            FeeStructureSeeder::class,
         ]);
     }
 }

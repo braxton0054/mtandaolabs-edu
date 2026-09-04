@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Jetstream;
@@ -33,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(100);
+
+        // Behind Caddy + Cloudflare: always generate HTTPS URLs.
+        URL::forceScheme('https');
 
         // Platform access sits outside school roles. A school role name must
         // never grant access above its own school.

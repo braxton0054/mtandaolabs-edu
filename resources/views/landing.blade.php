@@ -18,8 +18,9 @@
             --text-dim: #5c6b78;
             --accent: #7c5cff;
             --accent-soft: rgba(124, 92, 255, 0.14);
-            --gold: #e3b341;
-            --gold-soft: rgba(227, 179, 65, 0.12);
+            --cyan: #22d3ee;
+            --cyan-soft: rgba(34, 211, 238, 0.12);
+            --brand-grad: linear-gradient(90deg, #7c5cff, #22d3ee);
             --radius: 6px;
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
             --font: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
@@ -32,8 +33,9 @@
         img { display: block; max-width: 100%; }
         .container { width: min(1100px, 92%); margin-inline: auto; }
         .mono { font-family: var(--mono); }
-        .gold { color: var(--gold); }
+        .cyan { color: var(--cyan); }
         .accent { color: var(--accent); }
+        .grad { background: var(--brand-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .page-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
         .bg-grid {
             position: absolute; inset: 0;
@@ -65,8 +67,8 @@
             cursor: pointer; border: 1px solid transparent; transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
         }
         .btn:hover { transform: translateY(-2px); }
-        .btn-gold { background: var(--gold); color: #10092b; }
-        .btn-gold:hover { box-shadow: 0 10px 30px rgba(227,179,65,0.25); }
+        .btn-brand { background: var(--brand-grad); color: #08121a; }
+        .btn-brand:hover { box-shadow: 0 10px 30px rgba(34,211,238,0.25); }
         .btn-ghost { border-color: var(--hairline); color: var(--text); background: transparent; }
         .btn-ghost:hover { border-color: var(--accent); color: #fff; }
         .btn-accent { background: var(--accent); color: #fff; }
@@ -75,31 +77,46 @@
         /* Hero */
         .hero { padding: clamp(64px, 10vw, 130px) 0 50px; position: relative; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
-        .eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+        .eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; }
         .hero h1 { font-size: clamp(2.4rem, 5.5vw, 3.9rem); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; }
         .hero-sub { margin: 22px 0 30px; color: var(--text-muted); font-size: 1.06rem; max-width: 540px; }
         .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
         .hero-proof { margin-top: 22px; color: var(--text-dim); font-size: 0.78rem; display: flex; align-items: center; gap: 8px; }
-        .proof-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(227,179,65,0.15); }
+        .proof-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 4px rgba(34,211,238,0.15); }
         .hero-visual { position: relative; }
-        .hero-frame {
-            position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--hairline);
+        .dash-mock {
+            border-radius: 14px; overflow: hidden; border: 1px solid var(--hairline);
             box-shadow: 0 30px 80px rgba(0,0,0,0.5); background: var(--panel);
+            font-size: 12px;
         }
-        .hero-frame img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
-        .hero-frame .frame-overlay {
-            position: absolute; inset: 0; display: flex; align-items: flex-end;
-            background: linear-gradient(180deg, transparent 50%, rgba(6,8,12,0.9));
-            padding: 22px;
-        }
-        .frame-chip { font-size: 0.78rem; color: rgba(232,237,242,0.9); letter-spacing: 0.06em; }
-        .frame-chip b { color: #fff; font-size: 1rem; }
+        .dash-topbar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--hairline); background: var(--panel-2); }
+        .dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dash-dot.r { background: #f87171; } .dash-dot.y { background: #fbbf24; } .dash-dot.g { background: #34d399; }
+        .dash-topbar .url { margin-left: 12px; color: var(--text-dim); font-size: 10px; font-family: var(--mono); }
+        .dash-body { display: grid; grid-template-columns: 120px 1fr; min-height: 260px; }
+        .dash-side { background: var(--bg-soft); border-right: 1px solid var(--hairline); padding: 14px 10px; display: flex; flex-direction: column; gap: 8px; }
+        .dash-side .s-item { padding: 6px 10px; border-radius: 6px; color: var(--text-muted); font-size: 10px; }
+        .dash-side .s-item.active { background: var(--accent-soft); color: var(--accent); }
+        .dash-main { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+        .dash-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .dash-stat { border: 1px solid var(--hairline); border-radius: 8px; padding: 12px; background: var(--panel); }
+        .dash-stat .n { font-size: 18px; font-weight: 700; }
+        .dash-stat .l { color: var(--text-dim); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; }
+        .dash-table { border: 1px solid var(--hairline); border-radius: 8px; overflow: hidden; }
+        .dash-table .th { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px 12px; background: var(--panel-2); color: var(--text-dim); font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; }
+        .dash-table .tr { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 8px 12px; border-top: 1px solid var(--hairline); color: var(--text-muted); font-size: 10px; }
+        .dash-table .tr .grade { color: var(--cyan); font-weight: 600; }
+        .dash-chart { display: flex; align-items: flex-end; gap: 6px; height: 70px; padding: 10px 12px 0; border: 1px solid var(--hairline); border-radius: 8px; }
+        .dash-chart .bar { flex: 1; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, var(--accent), var(--cyan)); opacity: 0.8; }
+        .dash-chart .bar:nth-child(2n) { opacity: 0.5; }
+        .dash-chart .bar:nth-child(3n) { opacity: 1; }
+        .hero-frame .frame-overlay { display: none; }
 
         /* Feature strip */
         .marquee { margin-top: 60px; overflow: hidden; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); padding: 14px 0; white-space: nowrap; }
         .marquee-track { display: inline-flex; align-items: center; gap: 26px; animation: scroll 30s linear infinite; }
         .marquee-track span { font-size: 0.76rem; letter-spacing: 0.18em; color: var(--text-muted); }
-        .marquee-track i { color: var(--gold); font-style: normal; font-size: 0.6rem; }
+        .marquee-track i { color: var(--cyan); font-style: normal; font-size: 0.6rem; }
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
         /* Sections */
@@ -114,7 +131,7 @@
             background: linear-gradient(180deg, var(--panel), rgba(15,21,30,0.5));
             transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
         }
-        .feature:hover { transform: translateY(-4px); border-color: rgba(124,92,255,0.4); }
+        .feature:hover { transform: translateY(-4px); border-color: rgba(34,211,238,0.4); }
         .f-icon {
             display: inline-flex; align-items: center; justify-content: center;
             width: 42px; height: 42px; border-radius: 8px; background: var(--accent-soft); color: var(--accent);
@@ -127,7 +144,7 @@
         .cta-band { padding: 30px 0 90px; }
         .cta-card {
             border-radius: 16px; padding: 56px 40px; text-align: center;
-            background: linear-gradient(135deg, rgba(124,92,255,0.12), rgba(227,179,65,0.08));
+            background: linear-gradient(135deg, rgba(124,92,255,0.12), rgba(34,211,238,0.08));
             border: 1px solid rgba(124,92,255,0.3);
         }
         .cta-card h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; margin-bottom: 12px; }
@@ -135,7 +152,7 @@
 
         .footer { border-top: 1px solid var(--hairline); padding: 30px 0; }
         .footer-inner { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
-        .footer a { color: var(--gold); }
+        .footer a { color: var(--cyan); }
 
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -163,7 +180,7 @@
                 <a href="#features">Features</a>
                 <a href="{{ route('login') }}">Login</a>
             </div>
-            <a class="btn btn-gold" href="{{ route('login') }}">Get started</a>
+            <a class="btn btn-brand" href="{{ route('login') }}">Get started</a>
         </div>
     </nav>
 
@@ -171,10 +188,10 @@
         <div class="container hero-grid">
             <div class="hero-copy">
                 <p class="eyebrow mono">SCHOOL ADMIN, SIMPLIFIED</p>
-                <h1>Run your school<br>from <span class="gold">one place.</span></h1>
+                <h1>Run your school<br>from <span class="grad">one place.</span></h1>
                 <p class="hero-sub">mtandaolabsEdu helps Kenyan schools manage classes, students, teachers, exams and fees — without spreadsheets and paper trails.</p>
                 <div class="hero-ctas">
-                    <a class="btn btn-gold" href="{{ route('login') }}">Sign in →</a>
+                    <a class="btn btn-brand" href="{{ route('login') }}">Sign in →</a>
                     <a class="btn btn-ghost mono" href="#features">See features</a>
                 </div>
                 <div class="hero-proof mono">
@@ -182,10 +199,36 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="hero-frame">
-                    <img src="{{ asset(config('app.logo')) }}" alt="mtandaolabsEdu dashboard preview">
-                    <div class="frame-overlay">
-                        <div class="frame-chip mono"><b>mtandaolabsEdu</b> — students · marks · fees · reports</div>
+                <div class="dash-mock" aria-hidden="true">
+                    <div class="dash-topbar">
+                        <span class="dash-dot r"></span><span class="dash-dot y"></span><span class="dash-dot g"></span>
+                        <span class="url">dashboard.mtandaolabsEdu</span>
+                    </div>
+                    <div class="dash-body">
+                        <div class="dash-side">
+                            <div class="s-item active">📊 Dashboard</div>
+                            <div class="s-item">🎓 Students</div>
+                            <div class="s-item">👩‍🏫 Teachers</div>
+                            <div class="s-item">📝 Exams</div>
+                            <div class="s-item">💰 Fees</div>
+                            <div class="s-item">📅 Timetable</div>
+                        </div>
+                        <div class="dash-main">
+                            <div class="dash-row">
+                                <div class="dash-stat"><div class="n">1,240</div><div class="l">Students</div></div>
+                                <div class="dash-stat"><div class="n">64</div><div class="l">Teachers</div></div>
+                                <div class="dash-stat"><div class="n">98%</div><div class="l">Fee paid</div></div>
+                            </div>
+                            <div class="dash-chart">
+                                <div class="bar" style="height:45%"></div><div class="bar" style="height:60%"></div><div class="bar" style="height:52%"></div><div class="bar" style="height:75%"></div><div class="bar" style="height:68%"></div><div class="bar" style="height:90%"></div><div class="bar" style="height:82%"></div>
+                            </div>
+                            <div class="dash-table">
+                                <div class="th"><span>Student</span><span>Class</span><span>Average</span></div>
+                                <div class="tr"><span>Anne Wanjiku</span><span>Grade 6</span><span class="grade">A</span></div>
+                                <div class="tr"><span>Kevin Otieno</span><span>Grade 4</span><span class="grade">B+</span></div>
+                                <div class="tr"><span>Zawadi Mwangi</span><span>Grade 7</span><span class="grade">A−</span></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -245,7 +288,7 @@
                 <h2>Ready to modernise your school?</h2>
                 <p>Talk to Mtandao Labs about getting your school on mtandaolabsEdu.</p>
                 <div class="hero-ctas" style="justify-content:center;">
-                    <a class="btn btn-gold" href="{{ route('login') }}">Sign in</a>
+                    <a class="btn btn-brand" href="{{ route('login') }}">Sign in</a>
                 </div>
             </div>
         </div>

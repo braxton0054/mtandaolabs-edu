@@ -22,12 +22,12 @@
     .mtandao-loader-logo img {
         width: 88px; height: 88px; border-radius: 22px; object-fit: cover;
         animation: mtandao-pulse 1.6s ease-in-out infinite;
-        box-shadow: 0 0 44px rgba(124, 92, 255, 0.35);
+        box-shadow: 0 0 44px rgba(34, 211, 238, 0.3);
     }
     .mtandao-loader-spinner {
         width: 34px; height: 34px;
-        border: 3px solid rgba(227, 179, 65, 0.18);
-        border-top-color: #e3b341;
+        border: 3px solid rgba(34, 211, 238, 0.18);
+        border-top-color: #22d3ee;
         border-radius: 50%;
         animation: mtandao-spin .8s linear infinite;
     }
@@ -38,7 +38,7 @@
     }
     .mtandao-navbar {
         position: fixed; top: 0; left: 0; height: 3px; width: 0;
-        background: linear-gradient(90deg, #7c5cff, #e3b341);
+        background: linear-gradient(90deg, #7c5cff, #22d3ee);
         z-index: 99998; opacity: 0;
         transition: opacity .25s ease;
         pointer-events: none;

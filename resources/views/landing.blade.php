@@ -115,7 +115,8 @@
         .dash-topbar .url { margin-left: 12px; color: var(--text-dim); font-size: 10px; font-family: var(--mono); }
         .dash-body { display: grid; grid-template-columns: 120px 1fr; min-height: 260px; }
         .dash-side { background: var(--bg-soft); border-right: 1px solid var(--hairline); padding: 14px 10px; display: flex; flex-direction: column; gap: 8px; }
-        .dash-side .s-item { padding: 6px 10px; border-radius: 6px; color: var(--text-muted); font-size: 10px; }
+        .dash-side .s-item { padding: 6px 10px; border-radius: 6px; color: var(--text-muted); font-size: 10px; display: flex; align-items: center; gap: 6px; }
+        .dash-side .s-item svg { width: 13px; height: 13px; flex: 0 0 auto; }
         .dash-side .s-item.active { background: var(--green-soft); color: var(--green); }
         .dash-main { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
         .dash-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -152,9 +153,10 @@
         .feature:hover { transform: translateY(-4px); border-color: var(--green); box-shadow: 0 12px 30px rgba(26,138,76,0.08); }
         .f-icon {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 42px; height: 42px; border-radius: 8px; background: var(--green-soft); color: var(--green);
-            font-size: 1.05rem; margin-bottom: 14px;
+            width: 44px; height: 44px; border-radius: 10px; background: var(--green-soft); color: var(--green);
+            margin-bottom: 14px;
         }
+        .f-icon svg, .s-item svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
         .feature h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
         .feature p { color: var(--text-muted); font-size: 0.9rem; }
 
@@ -235,12 +237,12 @@
                     </div>
                     <div class="dash-body">
                         <div class="dash-side">
-                            <div class="s-item active">📊 Dashboard</div>
-                            <div class="s-item">🎓 Students</div>
-                            <div class="s-item">👩‍🏫 Teachers</div>
-                            <div class="s-item">📝 Exams</div>
-                            <div class="s-item">💰 Fees</div>
-                            <div class="s-item">📅 Timetable</div>
+                            <div class="s-item active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> Dashboard</div>
+                            <div class="s-item"><svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg> Students</div>
+                            <div class="s-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Teachers</div>
+                            <div class="s-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> Exams</div>
+                            <div class="s-item"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Fees</div>
+                            <div class="s-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg> Timetable</div>
                         </div>
                         <div class="dash-main">
                             <div class="dash-row">
@@ -278,32 +280,32 @@
             </div>
             <div class="feature-grid">
                 <div class="feature">
-                    <div class="f-icon">🎓</div>
+                    <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 10v6"/></svg></div>
                     <h3>Students &amp; admissions</h3>
                     <p>Manage student records, classes and streams. Admit, promote and graduate with one click.</p>
                 </div>
                 <div class="feature">
-                    <div class="f-icon">👩‍🏫</div>
+                    <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
                     <h3>Teachers &amp; staff</h3>
                     <p>Teacher profiles, class assignments and subject allocation — clear and simple.</p>
                 </div>
                 <div class="feature">
-                    <div class="f-icon">📝</div>
+                    <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg></div>
                     <h3>Exams &amp; marks</h3>
                     <p>Mid-term and end-term exams, CBC strand-based assessment, and automatic averages.</p>
                 </div>
                 <div class="feature">
-                    <div class="f-icon">💰</div>
+                    <div class="f-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></div>
                     <h3>Fees &amp; payments</h3>
                     <p>Fee structures per class and term, balance tracking, receipts — M-Pesa ready.</p>
                 </div>
                 <div class="feature">
-                    <div class="f-icon">📅</div>
+                    <div class="f-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></div>
                     <h3>Timetables</h3>
                     <p>Build class timetables with time slots, weekdays and teacher assignments.</p>
                 </div>
                 <div class="feature">
-                    <div class="f-icon">🏫</div>
+                    <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div>
                     <h3>Multi-school</h3>
                     <p>One platform, many schools. Perfect for education groups, branches and franchises.</p>
                 </div>

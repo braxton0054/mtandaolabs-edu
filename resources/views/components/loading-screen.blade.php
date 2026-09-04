@@ -11,10 +11,26 @@
 <div id="mtandao-navbar" class="mtandao-navbar" aria-hidden="true"></div>
 
 <style>
+    :root {
+        --loader-bg: #f7f8fa;
+        --loader-text: #12201a;
+        --loader-ring: rgba(26, 138, 76, 0.18);
+        --loader-ring-top: #1a8a4c;
+        --loader-shadow: rgba(26, 138, 76, 0.3);
+        --loader-bar: linear-gradient(90deg, #1a8a4c, #d92d20);
+    }
+    [data-theme="dark"] {
+        --loader-bg: #090c12;
+        --loader-text: #e8edf2;
+        --loader-ring: rgba(52, 211, 153, 0.18);
+        --loader-ring-top: #34d399;
+        --loader-shadow: rgba(52, 211, 153, 0.3);
+        --loader-bar: linear-gradient(90deg, #34d399, #f87171);
+    }
     .mtandao-loader {
         position: fixed; inset: 0; z-index: 99999;
         display: flex; align-items: center; justify-content: center;
-        background: #090c12;
+        background: var(--loader-bg);
         transition: opacity .4s ease, visibility .4s ease;
     }
     .mtandao-loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -22,23 +38,23 @@
     .mtandao-loader-logo img {
         width: 88px; height: 88px; border-radius: 22px; object-fit: cover;
         animation: mtandao-pulse 1.6s ease-in-out infinite;
-        box-shadow: 0 0 44px rgba(34, 211, 238, 0.3);
+        box-shadow: 0 0 44px var(--loader-shadow);
     }
     .mtandao-loader-spinner {
         width: 34px; height: 34px;
-        border: 3px solid rgba(34, 211, 238, 0.18);
-        border-top-color: #22d3ee;
+        border: 3px solid var(--loader-ring);
+        border-top-color: var(--loader-ring-top);
         border-radius: 50%;
         animation: mtandao-spin .8s linear infinite;
     }
     .mtandao-loader-text {
         font-family: ui-sans-serif, system-ui, sans-serif;
         font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-        font-size: 13px; color: #e8edf2;
+        font-size: 13px; color: var(--loader-text);
     }
     .mtandao-navbar {
         position: fixed; top: 0; left: 0; height: 3px; width: 0;
-        background: linear-gradient(90deg, #7c5cff, #22d3ee);
+        background: var(--loader-bar);
         z-index: 99998; opacity: 0;
         transition: opacity .25s ease;
         pointer-events: none;

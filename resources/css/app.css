@@ -4,6 +4,72 @@
 @source "../../resources/**/*.blade.php";
 @source "../../app/**/*.php";
 
+/* ============================================================
+   mtandaolabsEdu brand override — green / white / red
+   (April UI tokens overridden system-wide)
+   ============================================================ */
+:root {
+    /* Light — white surfaces, deep green primary, red destructive */
+    --background: 150 33% 98%;          /* near-white, faint green */
+    --foreground: 152 30% 10%;          /* very dark green-black */
+    --card: 0 0% 100%;                  /* pure white */
+    --card-foreground: 152 30% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 152 30% 10%;
+    --primary: 145 68% 32%;             /* #1a8a4c green */
+    --primary-foreground: 0 0% 100%;    /* white text on green */
+    --secondary: 150 20% 92%;           /* pale green tint */
+    --secondary-foreground: 152 30% 10%;
+    --muted: 150 20% 92%;
+    --muted-foreground: 150 10% 38%;
+    --accent: 150 25% 90%;
+    --accent-foreground: 152 30% 10%;
+    --destructive: 4 72% 50%;           /* #d92d20 red */
+    --destructive-foreground: 0 0% 98%;
+    --border: 150 15% 84%;
+    --input: 150 15% 84%;
+    --ring: 145 68% 32%;
+    --sidebar-background: 150 25% 95%;
+    --sidebar-foreground: 152 30% 10%;
+    --sidebar-primary: 145 68% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 150 20% 90%;
+    --sidebar-accent-foreground: 152 30% 10%;
+    --sidebar-border: 150 15% 84%;
+    --sidebar-ring: 145 68% 32%;
+}
+
+.dark {
+    /* Dark — deep green-black surfaces, bright green primary, soft red */
+    --background: 152 25% 6%;
+    --foreground: 150 15% 90%;
+    --card: 152 18% 9%;
+    --card-foreground: 150 15% 90%;
+    --popover: 152 18% 9%;
+    --popover-foreground: 150 15% 90%;
+    --primary: 160 62% 56%;             /* #34d399 bright green */
+    --primary-foreground: 152 30% 8%;
+    --secondary: 152 15% 14%;
+    --secondary-foreground: 150 15% 90%;
+    --muted: 152 15% 14%;
+    --muted-foreground: 150 10% 62%;
+    --accent: 152 15% 16%;
+    --accent-foreground: 150 15% 90%;
+    --destructive: 0 92% 71%;           /* #f87171 soft red */
+    --destructive-foreground: 0 30% 8%;
+    --border: 152 12% 17%;
+    --input: 152 12% 17%;
+    --ring: 160 62% 56%;
+    --sidebar-background: 152 25% 4%;
+    --sidebar-foreground: 150 15% 90%;
+    --sidebar-primary: 160 62% 56%;
+    --sidebar-primary-foreground: 152 30% 8%;
+    --sidebar-accent: 152 15% 14%;
+    --sidebar-accent-foreground: 150 15% 90%;
+    --sidebar-border: 152 12% 15%;
+    --sidebar-ring: 160 62% 56%;
+}
+
 @layer components {
     .beautify-scrollbar::-webkit-scrollbar {
         width: 5px;

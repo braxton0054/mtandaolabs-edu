@@ -58,7 +58,12 @@
         @if ($preparedResults == true)
             @isset($exams)
                 <div class="my-3">
-                    <a href="{{route('exams.report-card', ['student' => $student, 'scope' => $semester ? 'semester' : 'academic-year', 'scopeId' => $semester ?? $academicYear])}}" class="btn btn-primary" target="_blank">Download Report Card (PDF)</a>
+                    <a href="{{route('exams.report-card', ['student' => $student, 'scope' => $semester ? 'semester' : 'academic-year', 'scopeId' => $semester ?? $academicYear])}}"
+                       class="april-btn april-btn-primary inline-flex items-center gap-2"
+                       target="_blank">
+                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                        Download Report Card (PDF)
+                    </a>
                 </div>
                 <div class="overflow-scroll beautify-scrollbar">
                     <table class="border w-full">

@@ -1,8 +1,8 @@
-# Skuul Modernization Plan
+# mtandaolabsEdu Modernization Plan
 
 Status: Draft
 
-Skuul is a multi-school management system. This plan separates the product into business features before we change the code.
+mtandaolabsEdu is a multi-school management system. This plan separates the product into business features before we change the code.
 
 Do not start a large rewrite from this document alone. Confirm each business decision first.
 

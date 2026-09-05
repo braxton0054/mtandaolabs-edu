@@ -16,14 +16,14 @@ class InitCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'skuul:init';
+    protected $signature = 'edu:init';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install Skuul';
+    protected $description = 'Install mtandaolabsEdu';
 
     /**
      * No of attempts to be made to connect to the
@@ -128,7 +128,7 @@ class InitCommand extends Command
     {
         $this->line("Set up your app's environment details");
         $this->env = $this->choice(
-            'What environment are you installing skuul on?',
+            'What environment are you installing mtandaolabsEdu on?',
             ['local', 'production'],
             $this->env
         );
@@ -231,15 +231,15 @@ class InitCommand extends Command
         $mailReplyName = $this->ask('Mail Reply Name', getenv('MAIL_REPLY_NAME'));
 
         $mailCredentials = [
-            'MAIL_MAILER'        => $mailMailer,
-            'MAIL_HOST'          => $mailHost,
-            'MAIL_PORT'          => $mailPort,
-            'MAIL_USERNAME'      => $mailUsername,
-            'MAIL_PASSWORD'      => $mailPassword,
-            'MAIL_FROM_ADDRESS'  => $mailFromAddress,
-            'MAIL_FROM_NAME'     => $mailFromName,
+            'MAIL_MAILER' => $mailMailer,
+            'MAIL_HOST' => $mailHost,
+            'MAIL_PORT' => $mailPort,
+            'MAIL_USERNAME' => $mailUsername,
+            'MAIL_PASSWORD' => $mailPassword,
+            'MAIL_FROM_ADDRESS' => $mailFromAddress,
+            'MAIL_FROM_NAME' => $mailFromName,
             'MAIL_REPLY_ADDRESS' => $mailReplyAddress,
-            'MAIL_REPLY_NAME'    => $mailReplyName,
+            'MAIL_REPLY_NAME' => $mailReplyName,
         ];
 
         $this->setEnvironmentValue($mailCredentials);
@@ -266,12 +266,12 @@ class InitCommand extends Command
         $this->line('Creating super admin account');
         switch ($this->env) {
             case 'local':
-                $this->info('Since you are trying out skuul locally, we have already created a super admin account for you. Check the docs on what these credentials are if unsure');
+                $this->info('Since you are trying out mtandaolabsEdu locally, we have already created a super admin account for you. Check the docs on what these credentials are if unsure');
                 break;
             default:
-                $this->info('If you choose to not create a super admin now for some reason, you cen do so late by running php artisan skuul:create-super-admin');
+                $this->info('If you choose to not create a super admin now for some reason, you cen do so late by running php artisan edu:create-super-admin');
                 if ($this->confirm('Do you wish to create a super admin account now?', true)) {
-                    $this->call('skuul:create-super-admin');
+                    $this->call('edu:create-super-admin');
                 } else {
                     $this->line('skipping...');
                 }

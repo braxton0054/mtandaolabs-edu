@@ -14,7 +14,7 @@ jobs:
       - name: Check out the application
         uses: actions/checkout@v4
         with:
-          path: skuul
+          path: edu
 
       # April UI is required from a path repository beside the application.
       # Use a token with read access here if the repository becomes private.
@@ -33,19 +33,19 @@ jobs:
           coverage: none
 
       - name: Install PHP dependencies
-        working-directory: skuul
+        working-directory: edu
         run: composer install --no-ansi --no-interaction --no-progress --prefer-dist
 
       - name: Check code style
-        working-directory: skuul
+        working-directory: edu
         run: vendor/bin/pint --test
 
       - name: Run static analysis
-        working-directory: skuul
+        working-directory: edu
         run: vendor/bin/phpstan analyse --memory-limit=2G --no-progress
 
       - name: Audit dependencies
-        working-directory: skuul
+        working-directory: edu
         run: composer audit
 
   tests:
@@ -62,7 +62,7 @@ jobs:
       - name: Check out the application
         uses: actions/checkout@v4
         with:
-          path: skuul
+          path: edu
 
       - name: Check out April UI
         uses: actions/checkout@v4
@@ -89,22 +89,22 @@ jobs:
           mysql -h "$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE;"
 
       - name: Install PHP dependencies
-        working-directory: skuul
+        working-directory: edu
         run: composer install --no-ansi --no-interaction --no-progress --prefer-dist
 
       - name: Prepare the environment
-        working-directory: skuul
+        working-directory: edu
         run: |
           cp .env.example .env
           php artisan key:generate
           chmod -R 777 storage bootstrap/cache
 
       - name: Build front-end assets
-        working-directory: skuul
+        working-directory: edu
         run: |
           npm ci
           npm run build
 
       - name: Run tests
-        working-directory: skuul
+        working-directory: edu
         run: php artisan test

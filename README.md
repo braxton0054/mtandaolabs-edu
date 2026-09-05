@@ -54,7 +54,7 @@ docker compose exec laravel.test php artisan storage:link
 docker compose exec laravel.test bash -c "cd /var/www/html && npm install && npm run build"
 
 # create super admin
-docker compose exec laravel.test php artisan skuul:create-super-admin
+docker compose exec laravel.test php artisan edu:create-super-admin
 ```
 
 > **Note:** the app container runs PHP as uid/gid 1000 (`sail`). After bind-mounting the repo, run
@@ -70,8 +70,8 @@ docker compose exec laravel.test php artisan skuul:create-super-admin
 
 ## Default access
 
-* Super admin login via `php artisan skuul:create-super-admin`
-* (In local/dev mode, Skuul seeds a demo super admin — see upstream docs)
+* Super admin login via `php artisan edu:create-super-admin`
+* (In local/dev mode, mtandaolabsEdu seeds a demo super admin — see upstream docs)
 
 ## Credits & License
 

@@ -6,6 +6,7 @@ use App\Http\Requests\SchoolSetRequest;
 use App\Http\Requests\SchoolStoreRequest;
 use App\Http\Requests\SchoolUpdateRequest;
 use App\Models\School;
+use App\Services\School\SchoolContext;
 use App\Services\School\SchoolService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -109,5 +110,15 @@ class SchoolController extends Controller
         $this->schoolService->setSchool($school);
 
         return back()->with('success', __('School set successfully'));
+    }
+
+    /**
+     * Exit the working school back to the platform view.
+     */
+    public function exitSchool(): RedirectResponse
+    {
+        app(SchoolContext::class)->forget();
+
+        return redirect()->route('schools.index')->with('success', __('Exited working school'));
     }
 }

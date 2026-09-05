@@ -1,6 +1,6 @@
 @extends('layouts.app', ['breadcrumbs' => [
     ['href'=> route('dashboard'), 'text'=> 'Dashboard'],
-    ['href'=> route('semesters.index'), 'text'=> 'Semesters'],
+    ['href'=> route('semesters.index'), 'text'=> 'Terms'],
     ['href'=> route('semesters.create'), 'text'=> 'Create' , 'active'],
 ]])
 

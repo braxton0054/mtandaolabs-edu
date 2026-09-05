@@ -23,7 +23,7 @@
                     @endforeach
                 @endisset
             </x-select>
-            <x-input id="name" name="name" id="name" label="Name *"  placeholder="Name (Eg: Physics second semester syllabus) " wire:ignore/>
+            <x-input id="name" name="name" id="name" label="Name *"  placeholder="Name (Eg: Physics second term syllabus) " wire:ignore/>
             <x-textarea id="description" name="description" placeholder="Insert description (optional)... " fgroup-class="col-md-6" label="Description" rows="5"/>
             <x-input id="file" type="file" name="file" acept="pdf/*" label="Upload file *" placeholder="Choose a PDF file..." fgroup-class="col-md-6"/>
             <x-button label="Create" theme="primary" icon="fas fa-key" type="submit" class="w-full md:w-6/12"/>

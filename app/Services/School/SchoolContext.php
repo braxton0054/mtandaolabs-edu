@@ -139,8 +139,10 @@ class SchoolContext
             return $membership->school;
         }
 
-        // A platform administrator may have no membership anywhere.
-        return $user->is_platform_admin ? School::orderBy('id')->first() : null;
+        // A platform administrator must choose a school explicitly.
+        // Never silently drop them into the first school — school data
+        // is private per school until one is picked.
+        return null;
     }
 
     /**

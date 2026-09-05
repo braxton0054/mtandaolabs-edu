@@ -38,6 +38,7 @@ Route::middleware('auth', 'verified', 'App\Http\Middleware\EnsureAccountIsActive
     // School routes
     Route::resource('schools', SchoolController::class);
     Route::post('schools/set-school', ['App\Http\Controllers\SchoolController', 'setSchool'])->name('schools.setSchool');
+    Route::post('schools/exit-school', ['App\Http\Controllers\SchoolController', 'exitSchool'])->name('schools.exit');
 
     // super admin must have school id set
     Route::middleware(['App\Http\Middleware\RequireActiveSchool'])->group(function () {

@@ -119,7 +119,7 @@ class StudentService
      */
     public function createStudentRecord(User $student, $record)
     {
-        $record['admission_number'] || $record['admission_number'] = $this->generateAdmissionNumber();
+        $record['admission_number'] = $record['admission_number'] ?? $this->generateAdmissionNumber();
         $section = $this->sectionService->getSectionById($record['section_id']);
         if (!$this->myClassService->getClassById($record['my_class_id'])->sections->contains($section)) {
             throw new InvalidValueException('Section is not in class');

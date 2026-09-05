@@ -16,7 +16,7 @@
                 </div>
                 <p x-text="'Due: ' + (amount - waiver + fine - paid - payment_amount).toLocaleString()" class="md:place-self-center"></p>
                 <input type="hidden" value="{{$record->fee->id}}">
-                <x-button label="Add Payment" class="self-" icon="fas fa-money-check-alt"/>
+                <x-button label="Add Payment" class="self-" icon="fas fa-money-check-alt" type="submit"/>
                 @csrf
             </form>
         @endforeach

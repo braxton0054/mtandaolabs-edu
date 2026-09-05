@@ -147,5 +147,5 @@
         </div>
     </div>
     @csrf
-    <x-button label="Create Invoice" icon="fas fa-key" class="w-full md:w-3/12" wire:loading.attr="disabled"/>
+    <x-button label="Create Invoice" icon="fas fa-key" class="w-full md:w-3/12" wire:loading.attr="disabled" type="submit"/>
 </form>

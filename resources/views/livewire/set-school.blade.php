@@ -8,7 +8,7 @@
         </x-select>
         @csrf
         <div class="my-6 flex justify-center items-center">
-            <x-button class="m-auto w-full lg:w-3/12" icon="fa fa-key">
+            <x-button class="m-auto w-full lg:w-3/12" icon="fa fa-key" type="submit">
                 Set School
             </x-button>
         </div>

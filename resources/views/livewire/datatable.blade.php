@@ -54,7 +54,7 @@
                                                         </div>
                                                         <x-slot:footer>
                                                             <form action="{{route($column['action'],array_merge(($column['pre-route-parameters'] ?? []),[$model->id], ($column['post-route-parameters'] ?? [])))}}" method="POST">
-                                                                <x-button class="bg-red-600" icon="fa fa-trash" >
+                                                                <x-button class="bg-red-600" icon="fa fa-trash" type="submit">
                                                                     Continue with {{Str::lower($column['name'])}}
                                                                 </x-button>
                                                                 @method('delete')

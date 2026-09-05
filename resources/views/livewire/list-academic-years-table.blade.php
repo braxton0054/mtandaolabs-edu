@@ -9,7 +9,7 @@
         ]"
         :columns="[
             ['name' => 'Start Year', 'property' => 'start_year'],
-            ['name' => 'Start Year', 'property' => 'stop_year'],
+            ['name' => 'Stop Year', 'property' => 'stop_year'],
             ['name' => 'name'],
             ['type' => 'dropdown', 'name' => 'actions','links' => [
                 ['href' => 'academic-years.edit', 'text' => 'Edit', 'icon' => 'fas fa-cog',],

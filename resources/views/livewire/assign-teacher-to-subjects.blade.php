@@ -27,7 +27,7 @@
                     <div class="overflow-scroll beautify-scrollbar w-full">
                         <table class="border w-full">
                             <thead>
-                                <th class="p-2 border">Teacher</th>
+                                <th class="p-2 border">Subject</th>
                                 <th class="p-2 border">Choose Action</th>
                             </thead>
                             <tbody>

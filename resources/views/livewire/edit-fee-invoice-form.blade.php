@@ -13,7 +13,7 @@
                 </x-textarea>
                 @method('PUT')
                 @csrf
-                <x-button label="Edit" icon="fas fa-pen" class="w-full md:w-1/2 "/>
+                <x-button label="Edit" icon="fas fa-pen" class="w-full md:w-1/2 " type="submit"/>
             </div>
         </form>
     </div>
@@ -52,7 +52,7 @@
                 x-model.number="fine" error-bag="some-random-thing"/>
                 <p x-text="'Total: ' + (amount - waiver + fine).toLocaleString()" class="md:place-self-center"></p>
                 <input type="hidden" value="{{$record->fee->id}}">
-                <x-button label="Edit" class="self-end" icon="fas fa-pen"/>
+                <x-button label="Edit" class="self-end" icon="fas fa-pen" type="submit"/>
                 @csrf
                 @method('PUT')
             </form>
@@ -63,7 +63,7 @@
                 </div>
                 <x-slot:footer>
                     <form action="{{route('fee-invoice-records.destroy', $record->id)}}" method="POST">
-                        <x-button class="bg-red-600" icon="fa fa-trash" >
+                        <x-button class="bg-red-600" icon="fa fa-trash" type="submit">
                             Continue With Delete
                         </x-button>
                         @method('delete')
@@ -103,7 +103,7 @@
             <p x-text="'Total: '+((parseInt(amount) - parseInt(waiver) + parseInt(fine) - parseInt(paid)) || 0).toLocaleString()" class="self-end p-6"></p>
             @csrf
         </div>
-        <x-button label="Create" icon="fas fa-key" class="w-full md:w-1/4"/>
+        <x-button label="Create" icon="fas fa-key" class="w-full md:w-1/4" type="submit"/>
     </form>
 </div>
 </div>
